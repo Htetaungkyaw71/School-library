@@ -18,6 +18,7 @@
   - [Setup](#setup)
   - [Install](#install)
 - [👥 Authors](#authors)
+- [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
@@ -81,6 +82,18 @@
 
 - GitHub: [@htetaungkyaw](https://github.com/Htetaungkyaw71/)
 - Twitter: [@htetaungkyaw](https://twitter.com/htetaun91907337)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+> Describe 1 - 3 features you will add to the project.
+
+- [ ] **[add database]**
+- [ ] **[add basic ui]**
+- [ ] **[refector codebase]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
