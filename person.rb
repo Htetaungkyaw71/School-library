@@ -1,4 +1,5 @@
 require './decorator'
+require './rental'
 
 class Person < Nameable
   attr_reader :id
@@ -21,10 +22,10 @@ class Person < Nameable
     @name
   end
 
-  def add_rental(rental)
-    @rentals.push(rental)
-    rental.person = self
+  def add_rental(date, book)
+    Rental.new(date, book, self)
   end
+
 
   private
 
