@@ -2,6 +2,7 @@ require './book'
 require './student'
 require './teacher'
 require './rental'
+require 'json'
 
 class App
   def initialize
@@ -31,6 +32,7 @@ class App
   end
 
   def list_all_books
+    print @rentals
     list(@books, 'book')
   end
 
@@ -115,4 +117,35 @@ class App
     puts 'Rentals: '
     rentals.map { |rental| puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}." }
   end
+
+  def save
+    books = @books.map { |book| { title: book.title, author: book.author } }.to_json
+    people = @people.map do |person|
+      { id: person.id, age: person.age, name: person.name, rentals: person.rentals }
+    end.to_json
+    rentals = @rentals.map do |rental|
+      {
+        date: rental.date,
+        book: {
+          title: rental.book.title,
+          author: rental.book.author,
+          rentals: rental.book.rentals
+        },
+        person: {
+          id: rental.person.id,
+          name: rental.person.name,
+          age: rental.person.age,
+          rentals: rental.person.rentals
+        }
+      }
+    end.to_json
+    save_book = File.open('book.json', 'w')
+    save_people = File.open('people.json', 'w')
+    save_rentals = File.open('rentals.json', 'w')
+    save_book.write(books)
+    save_people.write(people)
+    save_rentals.write(rentals)
+  end
+
+  
 end
