@@ -18,42 +18,27 @@ class App
     [age, name]
   end
 
-  def list (items,choose)
+  def list(items, choose)
     if items.empty?
-        puts "There is no #{choose}"
+      puts "There is no #{choose}"
+    elsif choose == 'book'
+      items.map { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
     else
-      if choose == "book"
-        items.map { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
-      else
-        items.map do |person|
-          puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-        end
+      items.map do |person|
+        puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
     end
   end
 
-
   def list_all_books
-    list(@books, "book")
-    # if @books.empty?
-    #   puts 'There is no book'
-    # else
-    #   @books.map { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
-    # end
+    list(@books, 'book')
   end
 
   def list_all_people
-    list(@people, "people")
-    # if @people.empty?
-    #   puts 'There is no people'
-    # else
-    #   @people.map do |person|
-    #     puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    #   end
-    # end
+    list(@people, 'people')
   end
 
-  def create_student 
+  def create_student
     input = input_age_and_name
     print 'Has parent permission? [y/n] : '
     permission = gets.chomp.downcase
@@ -68,26 +53,15 @@ class App
     @people << Teacher.new(specialization, input[0], input[1])
   end
 
-  
-
   def create_person
     print 'Do you want to create a student(1) or a teacher(2)? [Input the number]: '
     id = gets.chomp.to_i
     case id
     when 1
       create_student
-      # input = input_age_and_name
-      # print 'Has parent permission? [y/n] : '
-      # permission = gets.chomp.downcase
-      # permission = permission == 'y'
-      # @people << Student.new(nil, input[0], input[1], permission)
       puts 'Person created successfully'
     when 2
       create_teacher
-      # input = input_age_and_name
-      # print 'Specializaion: '
-      # specialization = gets.chomp
-      # @people << Teacher.new(specialization, input[0], input[1])
       puts 'Person created successfully'
     else
       puts 'Write Invalid number'
@@ -107,8 +81,7 @@ class App
     puts 'Select a book from the following lists by number'
     @books.map.with_index { |book, index| puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}" }
     index_book = gets.chomp.to_i
-    rental_book = @books[index_book]
-    rental_book
+    @books[index_book]
   end
 
   def select_person
@@ -117,10 +90,8 @@ class App
       puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     index_person = gets.chomp.to_i
-    rental_person = @people[index_person]
-    rental_person
+    @people[index_person]
   end
-
 
   def create_rental
     if @books.empty?
@@ -132,25 +103,10 @@ class App
       rental_person = select_person
       print 'Date: '
       date = gets.chomp
-      # puts 'Select a book from the following lists by number'
-      # @books.map.with_index { |book, index| puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}" }
-      # index_book = gets.chomp.to_i
-      # rental_book = @books[index_book]
-
-
-      # puts 'Select a person from the following lists by (Not Id)'
-      # @people.map.with_index do |person, index|
-      #   puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      # end
-      # index_person = gets.chomp.to_i
-      # rental_person = @people[index_person]
-
       @rentals << Rental.new(date, rental_book, rental_person)
       puts 'Rental created successfully'
     end
   end
-
-  
 
   def show_rental
     print 'ID of the person: '
