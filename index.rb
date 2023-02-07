@@ -4,6 +4,7 @@ class Index
   def initialize
     @app = App.new
   end
+
   def run
     loop do
       Display.new.text
@@ -27,6 +28,7 @@ class Index
     end
   end
 end
+
 class Display
   def text
     puts ' '
