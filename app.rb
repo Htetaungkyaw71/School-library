@@ -147,5 +147,42 @@ class App
     save_rentals.write(rentals)
   end
 
-  
+  def load
+    loaded_book
+    loaded_people
+    loaded_rental
+  end
+
+  def loaded_book
+    load_books = File.read('book.json') if File.exist?('book.json')
+    json_books = JSON.parse(load_books)
+    return if json_books.empty?
+
+    new_books = json_books.map { |book| Book.new(book['title'], book['author']) }
+    new_books.map { |book| @books << book }
+  end
+
+  def loaded_people
+    load_people = File.read('people.json') if File.exist?('people.json')
+    json_people = JSON.parse(load_people)
+    return if json_people.empty?
+
+    new_people = json_people.map { |person| Student.new(nil, person['age'], person['name'], true) }
+    new_people.map { |person| @people << person }
+  end
+
+  def loaded_rental
+    load_rentals = File.read('rentals.json') if File.exist?('rentals.json')
+    json_rentals = JSON.parse(load_rentals)
+    return if json_rentals.empty?
+
+    new_rentals = json_rentals.map do |rental|
+      Rental.new(
+        rental['date'],
+        Book.new(rental['book']['title'], rental['book']['author']),
+        Student.new(nil, rental['person']['age'], rental['person']['name'], true)
+      )
+    end
+    new_rentals.map { |rental| @rentals << rental }
+  end
 end
