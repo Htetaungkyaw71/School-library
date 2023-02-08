@@ -9,7 +9,6 @@ describe Rental do
       person = Person.new(20)
       book = Book.new('test_title', 'test_author')
 
-
       rental = Rental.new(date, book, person)
       expect(rental.date).to eq '1/1/2023'
       expect(rental.book).to be_a_kind_of(Book)
