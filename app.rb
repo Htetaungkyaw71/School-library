@@ -161,8 +161,6 @@ class App
       json_books = []
     end
 
-
-
     return if json_books.empty?
 
     new_books = json_books.map { |book| Book.new(book['title'], book['author']) }
@@ -192,8 +190,6 @@ class App
       File.write('rentals.json', [])
       json_rentals = []
     end
-
-
 
     return if json_rentals.empty?
 
