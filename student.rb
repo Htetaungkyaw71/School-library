@@ -2,8 +2,8 @@ require './person'
 require './classroom'
 
 class Student < Person
-  def initialize(classroom, age, name, parent_permission)
-    super(age, name, parent_permission: parent_permission)
+  def initialize(classroom, age, name, parent_permission, id = Random.rand(1..1000))
+    super(age, name, id, parent_permission: parent_permission)
     @classroom = classroom
   end
 

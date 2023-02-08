@@ -6,6 +6,7 @@ class Index
   end
 
   def run
+    @app.load
     loop do
       Display.new.text
       id = gets.chomp.to_i
@@ -23,6 +24,7 @@ class Index
       when 6
         @app.show_rental
       else
+        @app.save
         exit
       end
     end
